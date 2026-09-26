@@ -3,131 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Romantic Pull Lamp Animation</title>
-    <!-- Tailwind CSS for modern styling -->
+    <title>Marselus Dev • Romantic Pages</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             overflow: hidden;
             user-select: none;
         }
-
+        .romantic-font {
+            font-family: 'Playfair Display', serif;
+        }
         @keyframes pulseGlow {
             0%, 100% {
                 transform: scale(1);
-                filter: drop-shadow(0 0 25px rgba(244, 63, 94, 0.6)) drop-shadow(0 0 50px rgba(244, 63, 94, 0.4));
+                filter: drop-shadow(0 0 25px rgba(244, 63, 94, 0.6));
             }
             50% {
                 transform: scale(1.08);
-                filter: drop-shadow(0 0 35px rgba(244, 63, 94, 0.8)) drop-shadow(0 0 70px rgba(244, 63, 94, 0.6));
+                filter: drop-shadow(0 0 35px rgba(244, 63, 94, 0.8));
             }
         }
-
         @keyframes floatUp {
-            0% {
-                transform: translateY(0px) scale(0.6);
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-80px) scale(1.2);
-                opacity: 0;
-            }
+            0% { transform: translateY(0px) scale(0.6); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
         }
-
-        .heart-glow {
-            animation: pulseGlow 2s infinite ease-in-out;
-        }
-
+        .heart-glow { animation: pulseGlow 2s infinite ease-in-out; }
         .sparkle {
             position: absolute;
             background: white;
             border-radius: 50%;
             animation: floatUp 1.5s infinite ease-out;
         }
-
-        /* Cord pulling physics transition */
         #pullSwitch {
             transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
         }
-        #pullSwitch.pulling {
-            transform: translateY(28px);
-        }
-
-        /* Lamp bulb glow */
+        #pullSwitch.pulling { transform: translateY(28px); }
         .lamp-on {
             background-color: #fef08a !important;
             box-shadow: 0 0 40px 15px rgba(253, 224, 71, 0.7), inset 0 0 15px rgba(255, 255, 255, 0.9);
         }
-        .wire-glow {
-            box-shadow: 0 0 10px rgba(253, 224, 71, 0.5);
+        .wire-glow { box-shadow: 0 0 10px rgba(253, 224, 71, 0.5); }
+        
+        /* Halaman Transisi */
+        .page {
+            position: absolute;
+            inset: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+        }
+        .page-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95);
+        }
+        .page-active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
         }
     </style>
 </head>
-<body class="bg-[#121118] text-white h-screen w-screen flex flex-col justify-between items-center relative select-none overflow-hidden">
+<body class="bg-[#121118] text-white h-screen w-screen relative overflow-hidden">
 
-    <!-- Top Watermark / Title -->
-    <div class="absolute top-6 left-6 tracking-widest text-xs font-semibold text-rose-300/70 uppercase">
+    <!-- Top Watermark -->
+    <div class="absolute top-6 left-6 tracking-widest text-xs font-semibold text-rose-300/70 uppercase z-30">
         MARSELUS DEV • ROMANTIC EDITION
     </div>
 
-    <!-- Scene Container -->
-    <div id="scene" class="flex flex-col items-center relative mt-4 transition-all duration-700">
-        
-        <!-- Ceiling Mount -->
-        <div class="w-12 h-2 bg-neutral-700 rounded-t-md shadow-md"></div>
-
-        <!-- Upper Wire -->
-        <div class="w-0.5 h-36 bg-neutral-600 transition-colors duration-500" id="upperWire"></div>
-
-        <!-- Lamp Shade -->
-        <div class="relative flex flex-col items-center z-20">
-            <div class="w-32 h-14 bg-neutral-900 rounded-t-full border-b-2 border-neutral-700 shadow-xl flex justify-center items-end pb-1">
-                <!-- Lamp Bulb -->
-                <div id="bulb" class="w-10 h-10 rounded-full bg-neutral-700 shadow-inner transition-all duration-300"></div>
+    <!-- ================= HALAMAN 1: LAMPU GANTUNG ================= -->
+    <div id="page1" class="page page-active flex flex-col justify-between items-center h-full w-full py-6">
+        <!-- Scene Container -->
+        <div id="scene" class="flex flex-col items-center relative mt-4">
+            <div class="w-12 h-2 bg-neutral-700 rounded-t-md shadow-md"></div>
+            <div class="w-0.5 h-36 bg-neutral-600 transition-colors duration-500" id="upperWire"></div>
+            <div class="relative flex flex-col items-center z-20">
+                <div class="w-32 h-14 bg-neutral-900 rounded-t-full border-b-2 border-neutral-700 shadow-xl flex justify-center items-end pb-1">
+                    <div id="bulb" class="w-10 h-10 rounded-full bg-neutral-700 shadow-inner transition-all duration-300"></div>
+                </div>
+            </div>
+            <div class="relative flex flex-col items-center">
+                <div class="w-0.5 h-20 bg-neutral-500" id="lowerWire"></div>
+                <div id="pullSwitch" class="w-4 h-9 bg-amber-500/90 rounded-full shadow-lg border border-amber-300/50 flex justify-center items-start pt-1 cursor-pointer hover:bg-amber-400">
+                    <div class="w-1.5 h-3 bg-amber-200/60 rounded-full"></div>
+                </div>
             </div>
         </div>
 
-        <!-- Lower Cord (Pull Switch) -->
-        <div class="relative flex flex-col items-center">
-            <div class="w-0.5 h-20 bg-neutral-500" id="lowerWire"></div>
-            <!-- Pull Handle -->
-            <div id="pullSwitch" class="w-4 h-9 bg-amber-500/90 rounded-full shadow-lg border border-amber-300/50 flex justify-center items-start pt-1 cursor-pointer hover:bg-amber-400">
-                <div class="w-1.5 h-3 bg-amber-200/60 rounded-full"></div>
+        <!-- Central Heart & Tombol Pindah Halaman -->
+        <div id="loveContainer" class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none opacity-0 transition-opacity duration-700 z-10">
+            <div class="relative flex flex-col items-center justify-center gap-6">
+                <div class="text-7xl heart-glow select-none filter drop-shadow-[0_0_25px_rgba(244,63,94,0.8)]">
+                    ❤️
+                </div>
+                <!-- Tombol ke Halaman Kata Romantis -->
+                <button id="btnOpenMessage" onclick="goToPage2()" class="pointer-events-auto px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-medium text-sm rounded-full shadow-lg shadow-rose-500/30 transform hover:scale-105 transition-all duration-300 border border-rose-400/30">
+                    💌 Buka Pesan Spesial
+                </button>
             </div>
         </div>
+
+        <!-- Hint Footer -->
+        <div class="text-neutral-400 text-xs tracking-wider font-light z-20" id="hintText">
+            Pull cord to switch on the magic
+        </div>
     </div>
 
-    <!-- Central Romantic Element (Hidden by default, shown when lamp is on) -->
-    <div id="loveContainer" class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none opacity-0 transition-opacity duration-700 z-10">
-        <!-- Glowing Ambient Lines -->
-        <div class="absolute flex gap-16 opacity-30">
-            <div class="w-0.5 h-48 bg-gradient-to-b from-transparent via-rose-500 to-transparent"></div>
-            <div class="w-0.5 h-48 bg-gradient-to-b from-transparent via-rose-500 to-transparent"></div>
-        </div>
 
-        <!-- Heart Icon with Sparkles -->
-        <div class="relative flex items-center justify-center">
-            <div class="text-7xl heart-glow select-none filter drop-shadow-[0_0_25px_rgba(244,63,94,0.8)]">
-                ❤️
+    <!-- ================= HALAMAN 2: KATA-KATA ROMANTIS ================= -->
+    <div id="page2" class="page page-hidden flex flex-col justify-center items-center h-full w-full px-6 bg-[#18111a] z-20">
+        <div class="max-w-md w-full bg-neutral-900/80 backdrop-blur-md border border-rose-500/20 p-8 rounded-2xl shadow-2xl text-center relative">
+            
+            <!-- Hiasan Kecil -->
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 text-2xl bg-[#18111a] px-4 rounded-full text-rose-400">
+                ✨ 💖 ✨
             </div>
-            <!-- Floating Mini Sparkles -->
-            <div class="absolute -top-4 -right-4 text-rose-300 animate-pulse text-lg">✨</div>
-            <div class="absolute -bottom-2 -left-4 text-pink-400 animate-ping text-xs">💖</div>
+
+            <h2 class="romantic-font text-2xl md:text-3xl font-semibold text-rose-200 mt-2 mb-4">
+                Untuk Seseorang yang Spesial
+            </h2>
+
+            <p class="text-neutral-300 text-sm md:text-base leading-relaxed mb-6 font-light italic">
+                "Seperti cahaya lampu yang menerangi malam yang gelap, kehadiranmu membawa kehangatan dan ketenangan di setiap langkahku. Terima kasih telah menjadi alasan di balik senyuman terindahku."
+            </p>
+
+            <div class="w-16 h-0.5 bg-rose-500/40 mx-auto mb-6"></div>
+
+            <!-- Tombol Kembali -->
+            <button onclick="goToPage1()" class="px-5 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-rose-300 text-xs uppercase tracking-widest font-semibold rounded-full border border-neutral-700 transition-all duration-300">
+                ← Kembali ke Lampu
+            </button>
         </div>
     </div>
 
-    <!-- Bottom Hint Footer -->
-    <div class="absolute bottom-8 text-neutral-400 text-xs tracking-wider font-light transition-opacity duration-300" id="hintText">
-        Pull cord to switch on
-    </div>
 
-    <!-- Audio / FX Script -->
+    <!-- Skrip Interaktif -->
     <script>
         const scene = document.getElementById('scene');
         const pullSwitch = document.getElementById('pullSwitch');
@@ -136,32 +148,28 @@
         const lowerWire = document.getElementById('lowerWire');
         const loveContainer = document.getElementById('loveContainer');
         const hintText = document.getElementById('hintText');
+        
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
 
         let isOn = false;
         let animating = false;
 
-        // Sound effect helper (Web Audio API subtle click sound)
         function playClickSound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
-                
                 oscillator.type = 'sine';
                 oscillator.frequency.setValueAtTime(400, audioCtx.currentTime);
                 oscillator.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.05);
-                
                 gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
-                
                 oscillator.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
-                
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 0.05);
-            } catch(e) {
-                // Ignore audio context restriction errors if any
-            }
+            } catch(e) {}
         }
 
         pullSwitch.addEventListener('click', () => {
@@ -171,33 +179,43 @@
             playClickSound();
             pullSwitch.classList.add('pulling');
             isOn = !isOn;
-            pullSwitch.setAttribute('aria-pressed', String(isOn));
-            hintText.textContent = isOn ? 'Pull again to switch off' : 'Pull cord to switch on';
+            hintText.textContent = isOn ? 'Tekan tombol hati di bawah untuk pesan rahasia ✨' : 'Pull cord to switch on the magic';
 
             window.setTimeout(() => {
                 pullSwitch.classList.remove('pulling');
-                
                 if (isOn) {
                     bulb.classList.add('lamp-on');
                     upperWire.classList.add('wire-glow');
                     lowerWire.classList.add('wire-glow');
                     loveContainer.style.opacity = '1';
-                    document.body.style.backgroundColor = '#1a1018'; // Slight warm romantic tint
                 } else {
                     bulb.classList.remove('lamp-on');
                     upperWire.classList.remove('wire-glow');
                     lowerWire.classList.remove('wire-glow');
                     loveContainer.style.opacity = '0';
-                    document.body.style.backgroundColor = '#121118';
                 }
-
                 animating = false;
             }, 150);
         });
 
-        // Create dynamic background floating sparkles when active
+        // Fungsi Navigasi Antar Halaman
+        function goToPage2() {
+            page1.classList.remove('page-active');
+            page1.classList.add('page-hidden');
+            page2.classList.remove('page-hidden');
+            page2.classList.add('page-active');
+        }
+
+        function goToPage1() {
+            page2.classList.remove('page-active');
+            page2.classList.add('page-hidden');
+            page1.classList.remove('page-hidden');
+            page1.classList.add('page-active');
+        }
+
+        // Efek Partikel
         setInterval(() => {
-            if (!isOn) return;
+            if (!isOn || !page1.classList.contains('page-active')) return;
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
             const size = Math.random() * 4 + 2;
@@ -206,7 +224,6 @@
             sparkle.style.left = `${window.innerWidth / 2 + (Math.random() * 120 - 60)}px`;
             sparkle.style.top = `${window.innerHeight / 2 + 40}px`;
             sparkle.style.animationDuration = `${Math.random() * 1 + 1}s`;
-            
             document.body.appendChild(sparkle);
             setTimeout(() => sparkle.remove(), 1500);
         }, 300);
