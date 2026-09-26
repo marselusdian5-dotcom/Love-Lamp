@@ -98,9 +98,9 @@
                 <div class="text-7xl heart-glow select-none filter drop-shadow-[0_0_25px_rgba(244,63,94,0.8)]">
                     ❤️
                 </div>
-                <!-- Tombol ke Halaman Kata Romantis -->
+                <!-- Tombol ke Halaman Pesan -->
                 <button id="btnOpenMessage" onclick="goToPage2()" class="pointer-events-auto px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-medium text-sm rounded-full shadow-lg shadow-rose-500/30 transform hover:scale-105 transition-all duration-300 border border-rose-400/30">
-                    💌 Buka Pesan Spesial
+                    💌 Buka Pesan Untuk Kak Gea
                 </button>
             </div>
         </div>
@@ -112,29 +112,60 @@
     </div>
 
 
-    <!-- ================= HALAMAN 2: KATA-KATA ROMANTIS ================= -->
+    <!-- ================= HALAMAN 2: KATA-KATA ROMANTIS (PESAN 1) ================= -->
     <div id="page2" class="page page-hidden flex flex-col justify-center items-center h-full w-full px-6 bg-[#18111a] z-20">
         <div class="max-w-md w-full bg-neutral-900/80 backdrop-blur-md border border-rose-500/20 p-8 rounded-2xl shadow-2xl text-center relative">
-            
-            <!-- Hiasan Kecil -->
             <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 text-2xl bg-[#18111a] px-4 rounded-full text-rose-400">
-                ✨ 💖 ✨
+                🌙 ✨
             </div>
 
             <h2 class="romantic-font text-2xl md:text-3xl font-semibold text-rose-200 mt-2 mb-4">
-                Untuk Seseorang yang Spesial
+                Good Night, Kak Gea ✨
             </h2>
 
-            <p class="text-neutral-300 text-sm md:text-base leading-relaxed mb-6 font-light italic">
-                "Seperti cahaya lampu yang menerangi malam yang gelap, kehadiranmu membawa kehangatan dan ketenangan di setiap langkahku. Terima kasih telah menjadi alasan di balik senyuman terindahku."
+            <p class="text-neutral-300 text-sm md:text-base leading-relaxed mb-6 font-light">
+                "Hai Kak Gea, good night yaa, hope ur day till this night is good... Jangan tidur subuh lagi yaa."
             </p>
 
             <div class="w-16 h-0.5 bg-rose-500/40 mx-auto mb-6"></div>
 
-            <!-- Tombol Kembali -->
-            <button onclick="goToPage1()" class="px-5 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-rose-300 text-xs uppercase tracking-widest font-semibold rounded-full border border-neutral-700 transition-all duration-300">
-                ← Kembali ke Lampu
-            </button>
+            <div class="flex justify-between items-center">
+                <button onclick="goToPage1()" class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 text-xs uppercase tracking-widest font-semibold rounded-full border border-neutral-700 transition-all">
+                    ← Kembali
+                </button>
+                <button onclick="goToPage3()" class="px-5 py-2 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white text-xs uppercase tracking-widest font-semibold rounded-full shadow-md transition-all">
+                    Pesan Selanjutnya →
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= HALAMAN 3: KATA-KATA ROMANTIS (PESAN 2) ================= -->
+    <div id="page3" class="page page-hidden flex flex-col justify-center items-center h-full w-full px-6 bg-[#18111a] z-20">
+        <div class="max-w-md w-full bg-neutral-900/80 backdrop-blur-md border border-rose-500/20 p-8 rounded-2xl shadow-2xl text-center relative">
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 text-2xl bg-[#18111a] px-4 rounded-full text-rose-400">
+                💖 💌
+            </div>
+
+            <h2 class="romantic-font text-2xl md:text-3xl font-semibold text-rose-200 mt-2 mb-4">
+                Cerita Kak Gea
+            </h2>
+
+            <p class="text-neutral-300 text-sm md:text-base leading-relaxed mb-6 font-light">
+                "Kalo Kak Gea ada yang mau diceritain, cerita aja ya. Aku senang banget bisa dengerin dan tau cerita Kak Gea, apalagi kalo Kak Gea kasi tau kesibukan sehari-hari Kak Gea!!"
+            </p>
+
+            <div class="w-16 h-0.5 bg-rose-500/40 mx-auto mb-6"></div>
+
+            <div class="flex justify-between items-center">
+                <button onclick="goToPage2()" class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 text-xs uppercase tracking-widest font-semibold rounded-full border border-neutral-700 transition-all">
+                    ← Sebelumnya
+                </button>
+                <button onclick="goToPage1()" class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-rose-300 text-xs uppercase tracking-widest font-semibold rounded-full border border-neutral-700 transition-all">
+                    Kembali ke Lampu 💡
+                </button>
+            </div>
         </div>
     </div>
 
@@ -151,6 +182,7 @@
         
         const page1 = document.getElementById('page1');
         const page2 = document.getElementById('page2');
+        const page3 = document.getElementById('page3');
 
         let isOn = false;
         let animating = false;
@@ -179,7 +211,7 @@
             playClickSound();
             pullSwitch.classList.add('pulling');
             isOn = !isOn;
-            hintText.textContent = isOn ? 'Tekan tombol hati di bawah untuk pesan rahasia ✨' : 'Pull cord to switch on the magic';
+            hintText.textContent = isOn ? 'Tekan tombol hati di bawah untuk baca pesan ✨' : 'Pull cord to switch on the magic';
 
             window.setTimeout(() => {
                 pullSwitch.classList.remove('pulling');
@@ -198,19 +230,29 @@
             }, 150);
         });
 
-        // Fungsi Navigasi Antar Halaman
+        // Fungsi Navigasi Multi-Halaman
+        function hideAllPages() {
+            page1.classList.remove('page-active'); page1.classList.add('page-hidden');
+            page2.classList.remove('page-active'); page2.classList.add('page-hidden');
+            page3.classList.remove('page-active'); page3.classList.add('page-hidden');
+        }
+
+        function goToPage1() {
+            hideAllPages();
+            page1.classList.remove('page-hidden');
+            page1.classList.add('page-active');
+        }
+
         function goToPage2() {
-            page1.classList.remove('page-active');
-            page1.classList.add('page-hidden');
+            hideAllPages();
             page2.classList.remove('page-hidden');
             page2.classList.add('page-active');
         }
 
-        function goToPage1() {
-            page2.classList.remove('page-active');
-            page2.classList.add('page-hidden');
-            page1.classList.remove('page-hidden');
-            page1.classList.add('page-active');
+        function goToPage3() {
+            hideAllPages();
+            page3.classList.remove('page-hidden');
+            page3.classList.add('page-active');
         }
 
         // Efek Partikel
